@@ -1,11 +1,10 @@
-fastapi==0.115.0
-uvicorn[standard]==0.30.6
+fastapi==0.133.1
+uvicorn[standard]
 sqlalchemy==2.0.35
-pydantic==2.9.2
-pydantic-settings==2.5.2
-httpx==0.27.2
+pydantic-settings
 beautifulsoup4==4.12.3
 playwright==1.47.0
-requests==2.32.3
+httpx==0.28.1
+requests==2.33.0
 python-dateutil==2.9.0.post0
 geopy==2.4.1

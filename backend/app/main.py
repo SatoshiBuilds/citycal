@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .database import engine, Base
-from .routers import cities, events, crawl
+from .routers import cities, events
 
 Base.metadata.create_all(bind=engine)
 
@@ -22,7 +22,6 @@ app.add_middleware(
 
 app.include_router(cities.router, prefix="/cities", tags=["cities"])
 app.include_router(events.router, prefix="/events", tags=["events"])
-app.include_router(crawl.router, prefix="/crawl", tags=["crawling"])
 
 
 @app.get("/health", tags=["health"])

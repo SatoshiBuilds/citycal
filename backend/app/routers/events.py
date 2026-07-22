@@ -21,23 +21,24 @@ def list_events(
 ):
     query = db.query(Event).join(City)
 
+    day_filters = [Event.source.in_(['aachen_de','koeln_de','berlin_de','demo'])]
+
     if city:
-        query = query.filter(City.slug == city)
+        day_filters.append(City.slug == city)
 
     if category:
-        query = query.filter(Event.category == category)
+        day_filters.append(Event.category == category)
 
     if q:
-        query = query.filter(
-            (Event.title.ilike(f"%{q}%")) | (Event.description.ilike(f"%{q}%"))
-        )
+        day_filters.append((Event.title.ilike(f"%{q}%")) | (Event.description.ilike(f"%{q}%")))
 
     if from_:
-        query = query.filter(Event.start_at >= from_)
+        day_filters.append(Event.start_at >= from_)
 
     if to:
-        query = query.filter(Event.start_at <= to)
+        day_filters.append(Event.start_at <= to)
 
+    query = query.filter(*day_filters)
     query = query.order_by(Event.start_at.asc())
     results = query.all()
 
